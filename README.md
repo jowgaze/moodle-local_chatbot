@@ -13,7 +13,7 @@ Um plugin local para Moodle que adiciona um **chatbot de inteligência artificia
 
 ## 💻 Requisitos
 
-* Moodle 5.x ou superior.
+* Moodle 4.5.6+ ou superior.
 * PHP 8.x compatível com sua versão do Moodle.
 
 
