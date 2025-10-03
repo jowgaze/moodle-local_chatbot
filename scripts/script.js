@@ -1,6 +1,8 @@
 let isChatbotOpen = false;
+let isMaximum = false;
 const chatbot = document.getElementById('chatbot');
 const floatingBtn = document.getElementById('floating-btn');
+const maximizeBtn = document.getElementById('maximize-chatbot');
 const closeBtn = document.getElementById('close-chatbot');
 const sendBtn = document.getElementById('send-btn');
 const promptInput = document.getElementById('prompt-input');
@@ -18,7 +20,22 @@ function toggleChatbot() {
     isChatbotOpen = !isChatbotOpen;
 }
 
+function toggleWidth(){
+    if (!chatbot) return;
+
+    if (!isMaximum){
+        chatbot.style.width = "75%";
+    } else {
+        chatbot.style.width = "320px";
+    }
+
+    isMaximum = !isMaximum;
+}
+
+
+
 floatingBtn.addEventListener('click', toggleChatbot);
+maximizeBtn.addEventListener('click', toggleWidth);
 closeBtn.addEventListener('click', toggleChatbot);
 sendBtn.addEventListener('click', sendMessage);
 promptInput.addEventListener('keypress', (e) => {
