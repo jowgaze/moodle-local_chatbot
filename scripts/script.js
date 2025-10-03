@@ -10,9 +10,9 @@ function toggleChatbot() {
     if (!chatbot) return;
 
     if (isChatbotOpen) {
-        chatbot.classList.replace('flex', 'hidden');
+        chatbot.style.display = 'none';
     } else {
-        chatbot.classList.replace('hidden', 'flex');
+        chatbot.style.display = 'flex';
     }
 
     isChatbotOpen = !isChatbotOpen;
@@ -33,12 +33,12 @@ async function sendMessage() {
     if (!prompt) return;
 
     const userMessage = document.createElement('div');
-    userMessage.className = 'self-end bg-slate-200 mb-2 px-3 py-2 rounded-xl max-w-[80%] break-words';
+    userMessage.className = 'user-message';
     userMessage.textContent = prompt;
     chatbotBody.appendChild(userMessage);
 
     const loadingMessage = document.createElement('div');
-    loadingMessage.className = 'self-start bg-blue-200 mb-2 px-3 py-2 rounded-xl max-w-[80%] break-words';
+    loadingMessage.className = 'bot-message';
     loadingMessage.textContent = document.getElementById('chatbot-body').getAttribute('loading-text');
     chatbotBody.appendChild(loadingMessage);
     chatbotBody.scrollTop = chatbotBody.scrollHeight;
@@ -59,14 +59,15 @@ async function sendMessage() {
         loadingMessage.remove();
 
         const aiMessage = document.createElement('div');
-        aiMessage.className = 'self-start bg-blue-200 mb-2 px-3 py-2 rounded-xl max-w-[80%] break-words';
+        aiMessage.className = 'bot-message';
         aiMessage.textContent = data.response;
         chatbotBody.appendChild(aiMessage);
 
     } catch (error) {
         loadingMessage.remove();
         const errorMessage = document.createElement('div');
-        errorMessage.className = 'self-start bg-red-200 mb-2 px-3 py-2 rounded-xl max-w-[80%] break-words';
+        errorMessage.className = 'bot-message';
+        errorMessage.style.backgroundColor = "#fecaca"
         errorMessage.textContent = 'Erro ao conectar com a API.';
         chatbotBody.appendChild(errorMessage);
     }

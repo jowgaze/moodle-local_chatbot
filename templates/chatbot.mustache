@@ -1,24 +1,127 @@
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>
+    #floating-btn {
+        position: fixed;
+        right: 80px;
+        bottom: 20px;
+        z-index: 50;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 64px;
+        height: 64px;
+        background-color: #2563eb;
+        font-size: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s, background-color 0.2s;
+    }
 
-<div id="floating-btn"
-    class="right-20 bottom-5 z-50 fixed flex justify-center items-center bg-blue-600 hover:bg-blue-500 shadow-blue-900 shadow-md rounded-full w-16 h-16 text-white text-2xl hover:scale-105 cursor-pointer">
+    #floating-btn:hover {
+        background-color: #3b82f6;
+        transform: scale(1.05);
+    }
+
+    #chatbot {
+        position: fixed;
+        right: 20px;
+        bottom: 100px;
+        z-index: 50;
+        width: 320px;
+        height: 384px;
+        background-color: white;
+        border-radius: 8px;
+        border: 1px solid black;
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    #chatbot-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px;
+        background-color: #2563eb;
+        color: white;
+        font-weight: bold;
+    }
+
+    #close-chatbot {
+        cursor: pointer;
+        font-size: 20px;
+    }
+
+    #chatbot-body {
+        flex-grow: 1;
+        padding: 16px 8px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #chatbot-footer {
+        display: flex;
+        padding: 8px;
+        border-top: 1px solid #939393;
+    }
+
+    #prompt-input {
+        flex-grow: 1;
+        padding: 8px;
+        margin-right: 8px;
+        border: 1px solid #000;
+        border-radius: 8px;
+    }
+
+    #send-btn {
+        background-color: #2563eb;
+        color: white;
+        padding: 8px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    #send-btn:hover {
+        background-color: #3b82f6;
+    }
+
+    .user-message {
+        align-self: flex-end;
+        background-color: #e2e8f0;
+        margin-bottom: 8px;
+        padding: 8px 12px;
+        border-radius: 16px;
+        max-width: 80%;
+        word-break: break-word;
+    }
+
+    .bot-message {
+        align-self: flex-start;
+        background-color: #bfdbfe;
+        margin-bottom: 8px;
+        padding: 8px 12px;
+        border-radius: 16px;
+        max-width: 80%;
+        word-break: break-word;
+    }
+</style>
+<div id="floating-btn">
     <span>🤖</span>
 </div>
 
-<div id="chatbot"
-    class="hidden right-20 bottom-24 z-50 fixed flex-col bg-white shadow-md rounded-lg w-80 h-96 overflow-hidden">
-    <div id="chatbot-header" class="flex justify-between items-center bg-blue-600 p-3 text-white">
+<div id="chatbot">
+    <div id="chatbot-header">
         <span>{{title}}</span>
         <span id="close-chatbot" class="cursor-pointer">&times;</span>
     </div>
 
-    <div id="chatbot-body" class="flex flex-col px-2 py-4 overflow-y-auto grow" loading-text="{{loading_text}}">
+    <div id="chatbot-body" loading-text="{{loading_text}}">
     </div>
 
-    <div id="chatbot-footer" class="flex p-2 border-t border-black">
-        <input type="text" id="prompt-input" class="mr-2 p-2 border border-black rounded-lg grow"
-            placeholder="{{prompt_placeholder}}">
-        <button id="send-btn" class="bg-blue-600 hover:bg-blue-500 px-2 rounded-lg text-white cursor-pointer">{{send_button}}</button>
+    <div id="chatbot-footer">
+        <input type="text" id="prompt-input" placeholder="{{prompt_placeholder}}">
+        <button id="send-btn">{{send_button}}</button>
     </div>
 </div>
