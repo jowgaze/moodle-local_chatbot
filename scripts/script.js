@@ -63,7 +63,7 @@ async function sendMessage() {
     promptInput.value = '';
 
     try {
-        const response = await fetch('/local/chatbot_ai/index.php', {
+        const response = await fetch('/local/chatbot_ai/ajax/prompt.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
