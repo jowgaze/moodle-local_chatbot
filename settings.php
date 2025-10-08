@@ -21,5 +21,12 @@ if ($hassiteconfig) {
         'gemini-2.0-flash'
     ));
 
+    $settings->add(new admin_setting_configcolourpicker(
+        'local_chatbot_ai/primary_color',
+        get_string('primary_color', 'local_chatbot_ai'),
+        get_string('primary_color_desc', 'local_chatbot_ai'),
+        '#2563eb'
+    ));
+
     $ADMIN->add('localplugins', $settings);
 }

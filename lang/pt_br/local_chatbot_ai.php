@@ -10,3 +10,5 @@ $string['api_key'] = 'Chave da API';
 $string['api_key_desc'] = 'Digite aqui a chave da API usada para conectar o chatbot.';
 $string['api_model'] = 'Modelo da API';
 $string['api_model_desc'] = 'Informe a versão do Gemini que deve ser usado pelo chatbot (ex.: gemini-2.0-flash).';
+$string['primary_color'] = 'Cor principal';
+$string['primary_color_desc'] = 'Informe a cor principal (ex.: #2563eb)';
