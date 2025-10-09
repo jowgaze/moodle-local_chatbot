@@ -5,6 +5,10 @@ function local_chatbot_ai_before_footer()
 {
     global $PAGE, $OUTPUT;
 
+     if (!has_capability('local/chatbot_ai:view', context_system::instance())) {
+        return;
+    }
+
     $PAGE->requires->js(new moodle_url('/local/chatbot_ai/scripts/script.js'));
     $config = get_config('local_chatbot_ai');
 
