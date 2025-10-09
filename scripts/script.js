@@ -1,5 +1,6 @@
 let isChatbotOpen = false;
 let isMaximum = false;
+let isFirstTime = true;
 const chatbot = document.getElementById('chatbot');
 const floatingBtn = document.getElementById('floating-btn');
 const maximizeBtn = document.getElementById('maximize-chatbot');
@@ -15,6 +16,7 @@ function toggleChatbot() {
         chatbot.style.display = 'none';
     } else {
         chatbot.style.display = 'flex';
+        loadFirstResponse();
     }
 
     isChatbotOpen = !isChatbotOpen;
@@ -43,6 +45,29 @@ promptInput.addEventListener('keypress', (e) => {
         sendMessage();
     }
 });
+
+async function loadFirstResponse() {
+    if (!isFirstTime) return;
+
+    try {
+        const response = await fetch('/local/chatbot_ai/ajax/prompt.php');
+        const data = await response.json();
+
+        const aiMessage = document.createElement('div');
+        aiMessage.className = 'bot-message';
+        aiMessage.textContent = data.response;
+        chatbotBody.appendChild(aiMessage);
+        chatbotBody.scrollTop = chatbotBody.scrollHeight;
+
+        isFirstTime = false;
+    } catch (error) {
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'bot-message';
+        errorMessage.style.backgroundColor = "#fecaca"
+        errorMessage.textContent = 'Erro ao carregar a resposta inicial.';
+        chatbotBody.appendChild(errorMessage);
+    }
+}
 
 async function sendMessage() {
     const prompt = promptInput.value.trim();

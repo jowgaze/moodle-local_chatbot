@@ -3,10 +3,19 @@ require_once('../../../config.php');
 require_login();
 sesskey();
 
+global $USER;
+$fullname = fullname($USER);
+$firstname = $USER->firstname;
+
 header('Content-Type: application/json');
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    echo json_encode(['response' => "Olá {$firstname}, tudo bem? Em que posso te ajudar hoje em Semiologia e Semiotécnica?"]);
+    exit;
+}
 
 $prompt = required_param('prompt', PARAM_TEXT);
 
@@ -20,8 +29,7 @@ $api_key = $config->api_key;
 $api_model = $config->api_model;
 $url = "https://generativelanguage.googleapis.com/v1beta/models/{$api_model}:generateContent?key={$api_key}";
 
-global $USER;
-$system_instruction = get_string('context', 'local_chatbot_ai', $USER->firstname);
+$system_instruction = get_string('context', 'local_chatbot_ai', $fullname);
 
 $request_data = json_encode([
     "contents" => [
