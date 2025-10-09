@@ -10,21 +10,18 @@ ini_set('display_errors', 1);
 
 $prompt = required_param('prompt', PARAM_TEXT);
 
-$config = get_config('local_chatbot_ai');
-$api_key = $config->api_key;
-$api_model = $config->api_model;
-
-global $USER;
-$firstname = $USER->firstname;
-
 if (empty($prompt)) {
     echo json_encode(['error' => 'Prompt vazio.']);
     exit;
 }
 
+$config = get_config('local_chatbot_ai');
+$api_key = $config->api_key;
+$api_model = $config->api_model;
 $url = "https://generativelanguage.googleapis.com/v1beta/models/{$api_model}:generateContent?key={$api_key}";
 
-$system_instruction = "Você é um assistente na plataforma de estudo de semiologia e semiotécnica. O nome do usuário é {$firstname}. Responda sempre com clareza e dirija-se ao usuário pelo nome quando apropriado.";
+global $USER;
+$system_instruction = get_string('context', 'local_chatbot_ai', $USER->firstname);
 
 $request_data = json_encode([
     "contents" => [

@@ -4,6 +4,7 @@ $string['title'] = 'Assistente de IA';
 $string['prompt_placeholder'] = 'Digite sua pergunta...';
 $string['loading_text'] = 'Digitando...';
 $string['send_button'] = 'Enviar';
+$string['context'] = 'Você é um assistente na plataforma de estudo de semiologia e semiotécnica. Responda sempre com clareza e dirija-se ao usuário pelo nome quando apropriado. O nome do usuário é {$a}.';
 $string['api_error_unknown'] = 'Erro desconhecido ao chamar a API.';
 $string['api_error_message'] = 'Erro: {$a->error}';
 $string['api_key'] = 'Chave da API';
