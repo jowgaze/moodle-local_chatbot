@@ -1,6 +1,7 @@
 let isChatbotOpen = false;
 let isMaximum = false;
 let isFirstTime = true;
+
 const chatbot = document.getElementById('chatbot');
 const floatingBtn = document.getElementById('floating-btn');
 const maximizeBtn = document.getElementById('maximize-chatbot');
@@ -33,8 +34,6 @@ function toggleWidth(){
 
     isMaximum = !isMaximum;
 }
-
-
 
 floatingBtn.addEventListener('click', toggleChatbot);
 maximizeBtn.addEventListener('click', toggleWidth);
@@ -104,7 +103,6 @@ async function sendMessage() {
         aiMessage.className = 'bot-message';
         aiMessage.textContent = data.response;
         chatbotBody.appendChild(aiMessage);
-
     } catch (error) {
         loadingMessage.remove();
         const errorMessage = document.createElement('div');

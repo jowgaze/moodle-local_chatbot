@@ -1,7 +1,6 @@
 <?php
 require_once('../../../config.php');
 require_login();
-sesskey();
 
 global $USER;
 $fullname = fullname($USER);
@@ -42,7 +41,7 @@ $request_data = json_encode([
     ],
     "system_instruction" => [
         "parts" => [
-            "text" => $system_instruction
+            ["text" => $system_instruction]
         ]
     ]
 ]);
