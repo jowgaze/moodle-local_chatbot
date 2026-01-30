@@ -28,8 +28,10 @@ function toggleWidth(){
 
     if (!isMaximum){
         chatbot.style.width = "75%";
+        chatbot.style.height = "75%";
     } else {
         chatbot.style.width = "320px";
+        chatbot.style.height = "384px";
     }
 
     isMaximum = !isMaximum;
