@@ -101,7 +101,7 @@ async function sendMessage() {
 
         const aiMessage = document.createElement('div');
         aiMessage.className = 'bot-message';
-        aiMessage.textContent = data.response;
+        aiMessage.innerHTML = data.response;
         chatbotBody.appendChild(aiMessage);
     } catch (error) {
         loadingMessage.remove();
@@ -110,6 +110,7 @@ async function sendMessage() {
         errorMessage.style.backgroundColor = "#fecaca"
         errorMessage.textContent = 'Erro ao conectar com a API.';
         chatbotBody.appendChild(errorMessage);
+        console.error(error)
     }
 
     chatbotBody.scrollTop = chatbotBody.scrollHeight;

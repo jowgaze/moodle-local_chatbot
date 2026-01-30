@@ -1,5 +1,6 @@
 <?php
 require_once('../../../config.php');
+require_once($CFG->dirroot . '/local/chatbot_ai/scripts/Parsedown.php');
 require_login();
 
 global $USER;
@@ -61,7 +62,11 @@ $response_data = json_decode($response, true);
 
 if ($http_code === 200 && isset($response_data['candidates'][0]['content']['parts'][0]['text'])) {
     $text = $response_data['candidates'][0]['content']['parts'][0]['text'];
-    echo json_encode(['response' => $text]);
+
+    $parsedown = new Parsedown();
+    $html_text = $parsedown->text($text);
+
+    echo json_encode(['response' => $html_text]);
 } else {
     $error_message = isset($response_data['error']['message']) ? $response_data['error']['message'] : get_string('api_error_unknown', 'local_chatbot_ai');
     echo json_encode(['error' => $error_message]);
